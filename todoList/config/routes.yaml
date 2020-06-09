@@ -1,0 +1,6 @@
+app:
+  resource: "../src/Controller/"
+
+index:
+    path: /
+    controller: App\Controller\DefaultController::index
