@@ -2,7 +2,13 @@
 
 {% form_theme formUser 'bootstrap_4_layout.html.twig' %}
 
-{% block header_title %}<h1>Créer un utilisateur</h1>{% endblock %}
+{% block header_title %}
+    {%  if editMode %}
+        <h1>Modifier un utilisateur</h1>
+    {%  else  %}
+        <h1>Créer un utilisateur</h1>
+    {%  endif  %}
+{% endblock %}
 {% block header_img %}{% endblock %}
 
 {% block body %}
@@ -13,7 +19,7 @@
         {{ form_row(formUser.username) }}
         {{ form_row(formUser.email) }}
         {{ form_row(formUser.password) }}
-        {{ form_row(formUser.roles) }}
+        {{ form_row(formUser.roles.0) }}
 
         <button type="submit" class="btn btn-success">
             {%  if editMode %}
@@ -22,7 +28,7 @@
                 Ajouter l'utilisateur
             {%  endif  %}
         </button>
-        {{  form_end(formUser) }}
+        {{  form_end(formUser, {'render_rest': false}) }}
 
 
     </div>
