@@ -1,7 +1,4 @@
 {
-    "behat/transliterator": {
-        "version": "v1.3.0"
-    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -83,9 +80,6 @@
     },
     "egulias/email-validator": {
         "version": "2.1.17"
-    },
-    "gedmo/doctrine-extensions": {
-        "version": "v2.4.41"
     },
     "incenteev/composer-parameter-handler": {
         "version": "v2.1.4"
@@ -203,22 +197,13 @@
             "config/packages/sensio_framework_extra.yaml"
         ]
     },
-    "stof/doctrine-extensions-bundle": {
-        "version": "1.2",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "1.2",
-            "ref": "6c1ceb662f8997085f739cd089bfbef67f245983"
-        },
-        "files": [
-            "config/packages/stof_doctrine_extensions.yaml"
-        ]
-    },
     "swiftmailer/swiftmailer": {
         "version": "v6.2.3"
     },
     "symfony/asset": {
+        "version": "v4.4.9"
+    },
+    "symfony/browser-kit": {
         "version": "v4.4.9"
     },
     "symfony/cache": {
@@ -250,6 +235,9 @@
         "version": "v4.4.9"
     },
     "symfony/doctrine-bridge": {
+        "version": "v4.4.9"
+    },
+    "symfony/dom-crawler": {
         "version": "v4.4.9"
     },
     "symfony/dotenv": {
