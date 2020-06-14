@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Test\Repository;
-
 
 use App\DataFixtures\UserFixtures;
 use App\Repository\UserRepository;
@@ -13,7 +11,8 @@ class UserRepositoryTest extends KernelTestCase
 {
     use FixturesTrait;
 
-    public function testCount() {
+    public function testCount()
+    {
         self::bootKernel();
         $this->loadFixtures([UserFixtures::class]);
         $users = self::$container->get(UserRepository::class)->count([]);

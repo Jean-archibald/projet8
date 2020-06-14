@@ -3,65 +3,66 @@
 
 namespace App\Tests\Controller;
 
+use App\Tests\NeedLogin;
+use Liip\TestFixturesBundle\Test\FixturesTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
+
 
 class UserControllerTest extends WebTestCase
 {
 
+    use FixturesTrait;
+    use NeedLogin;
 
-    public function testUsersPageIsRestricted()
+    public function testToLoginWhenRoleIsNotSufficient()
     {
         $client = static::createClient(array(), array(
             'HTTP_HOST'       => 'localhost:8000',
         ));
-
+        $users = $this->loadFixtureFiles([__DIR__.'/users.yaml']);
+        /** @var User $user */
+        $this->login($client, $users['user_user']);
         $client->request('GET','/users');
-        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
+        $this->assertResponseStatusCodeSame(Response::HTTP_FORBIDDEN);
+
     }
 
-    public function testRedirectToLogin()
+    public function testToLoginWhenRoleIsAdmin()
     {
         $client = static::createClient(array(), array(
             'HTTP_HOST'       => 'localhost:8000',
         ));
+        $users = $this->loadFixtureFiles([__DIR__.'/users.yaml']);
+        /** @var User $user */
+        $this->login($client, $users['user_admin']);
         $client->request('GET','/users');
-        $this->assertResponseRedirects('/login');
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
 
     }
 
-    public function testUsersListPageIsUp()
+    public function testAddUser()
     {
         $client = static::createClient(array(), array(
             'HTTP_HOST'       => 'localhost:8000',
         ));
-        $client->request('GET','/users');
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
-
-
-    }
-
-    public function testAddNewUsers()
-    {
-        $client = $this->createClient();
-       # $userRepository = static::$container->get(UserRepository::class);
-        #$testUser = $userRepository->findOneByUsername('Administrateur');
-       # $client->loginUser($testUser);
+        $users = $this->loadFixtureFiles([__DIR__.'/users.yaml']);
+        /** @var User $user */
+        $this->login($client, $users['user_admin']);
 
         $crawler = $client->request('GET','/users/create');
-        $client->followRedirects(true);
+        $form = $crawler->filter('button.btn-success')->form();
+        $form['user[username]'] = "UserPhpUnit2";
+        $form['user[email]'] = "user@user.testAdd2";
+        $form['user[password][first]'] = "test";
+        $form['user[password][second]'] = "test";
+        $form['user[roles][0]'] = "ROLE_USER";
+        $client->submit($form);
 
-        $crawler = $client->submitForm('Ajouter', [
-            'user[username]' => "UserPhpUnit",
-            'user[email]' => "UserPhpUnit@php.unit",
-            'user[password][first]' => "test",
-            'user[password][second]' => "test",
-            'user[roles][0]' => "ROLE_ADMIN",
-        ]);
-        $client->followRedirects(true);
         $crawler = $client->followRedirect();
 
-        $this->assertSame(1,$crawler->filter('div.alert.alert-success')->count());
+        $this->assertSame(1, $crawler->filter('div.alert.alert-success')->count());
 
     }
+
 }

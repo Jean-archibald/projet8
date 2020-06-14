@@ -1,5 +1,12 @@
 App\Entity\User:
   user_user:
+    username: "Utilisateur"
+    password: "\\$2y\\$10\\$w09IrhYrtfANDkHCL3hvneovJjHCokbXF4cjzg93QZvo2YX/DD6Oa"
+    email: "test@test.test"
+    roles: "[]"
+
+  user_admin:
     username: "Administrateur"
-    password: "\\$2y\\$10\\$WyMSmN0QqpgnMpFFnd/bl.5e978zVOu27R0ppfBKAq1JrPjjWbM9i"
-    roles: ""
+    password: "\\$2y\\$10\\$w09IrhYrtfANDkHCL3hvneovJjHCokbXF4cjzg93QZvo2YX/DD6Oa"
+    email: "test@test.admin"
+    roles: ["ROLE_ADMIN"]
