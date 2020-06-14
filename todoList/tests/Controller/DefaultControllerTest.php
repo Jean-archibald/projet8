@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Controller;
+namespace App\Tests\Controller;
 
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -14,6 +14,8 @@ class DefaultControllerTest extends WebTestCase
         $client->request('GET','/');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+
     }
 
 }

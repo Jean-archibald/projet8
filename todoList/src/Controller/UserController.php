@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,6 +16,7 @@ class UserController extends AbstractController
 {
     /**
      * @Route("/users", name="user_list")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function listAction()
     {
@@ -24,6 +26,7 @@ class UserController extends AbstractController
     /**
      * @Route("/users/create", name="user_create")
      * @Route("/users/{id}/edit", name="user_edit")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function createAction(User $user = null, Request $request,EntityManagerInterface $manager, UserRepository $userRepository,UserPasswordEncoderInterface $encoder)
     {

@@ -20,12 +20,13 @@
         {{ form_row(formUser.email) }}
         {{ form_row(formUser.password) }}
         {{ form_row(formUser.roles.0) }}
+        {{ form_row(formUser._token) }}
 
         <button type="submit" class="btn btn-success">
             {%  if editMode %}
                 Enregistrer les modifications
             {%  else  %}
-                Ajouter l'utilisateur
+                Ajouter
             {%  endif  %}
         </button>
         {{  form_end(formUser, {'render_rest': false}) }}

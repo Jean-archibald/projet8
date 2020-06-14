@@ -1,0 +1,5 @@
+App\Entity\User:
+  user_user:
+    username: "Administrateur"
+    password: "\\$2y\\$10\\$WyMSmN0QqpgnMpFFnd/bl.5e978zVOu27R0ppfBKAq1JrPjjWbM9i"
+    roles: ""

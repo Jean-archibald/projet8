@@ -6,6 +6,9 @@
 parameters:
     locale: en
     cache_type: file_system
+    DATABASE_HOST: 127.0.0.1
+    DATABASE_USER: root
+    DATABASE_PASSWORD: root
 
 services:
     # default configuration for services in *this* file

@@ -1,9 +1,11 @@
 security:
     encoders:
-        App\Entity\User: bcrypt
+        App\Entity\User:
+            algorithm: bcrypt
 
     providers:
-        doctrine:
+        in_memory: { memory: null }
+        in_database:
             entity:
                 class: App\Entity\User
                 property: username
@@ -12,18 +14,25 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
         main:
-            anonymous: ~
-            pattern: ^/
+            anonymous: lazy
+            provider: in_database
+
             form_login:
-                login_path: login
+                login_path: security_login
                 check_path: login_check
                 always_use_default_target_path:  true
                 default_target_path:  /
-            logout: ~
+
+            logout:
+                path: /logout
+                target: /
+                invalidate_session: true
+            guard:
+                authenticators:
+                    - App\Security\UserAuthenticator
 
     access_control:
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/users, roles: ROLE_ADMIN }
-        - { path: ^/tasks, roles: IS_AUTHENTICATED_FULLY }
+        # - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        #- { path: ^/users, roles: ROLE_ADMIN }
+        #- { path: ^/tasks, roles: IS_AUTHENTICATED_FULLY }
