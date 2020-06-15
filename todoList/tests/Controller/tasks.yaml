@@ -1,0 +1,14 @@
+App\Entity\User:
+  user_admin:
+    username: "Administrateur"
+    password: "\\$2y\\$10\\$w09IrhYrtfANDkHCL3hvneovJjHCokbXF4cjzg93QZvo2YX/DD6Oa"
+    email: "test@test.admin"
+    roles: ["ROLE_ADMIN"]
+
+
+App\Entity\Task:
+  task_task:
+    title: "Test Without Author"
+    content: "This is the content"
+
+
