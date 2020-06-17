@@ -13,6 +13,7 @@ class TaskController extends AbstractController
 {
     /**
      * @Route("/tasks", name="task_list")
+     * @IsGranted("ROLE_USER")
      */
     public function listAction()
     {
@@ -26,6 +27,7 @@ class TaskController extends AbstractController
 
     /**
      * @Route("/tasks/create", name="task_create")
+     * @IsGranted("ROLE_USER")
      */
     public function createAction(Request $request)
     {
@@ -51,6 +53,7 @@ class TaskController extends AbstractController
 
     /**
      * @Route("/tasks/{id}/edit", name="task_edit")
+     * @IsGranted("ROLE_USER")
      */
     public function editAction(Task $task, Request $request)
     {
@@ -75,6 +78,7 @@ class TaskController extends AbstractController
 
     /**
      * @Route("/tasks/{id}/toggle", name="task_toggle")
+     * @IsGranted("ROLE_USER")
      */
     public function toggleTaskAction(Task $task)
     {
@@ -88,6 +92,7 @@ class TaskController extends AbstractController
 
     /**
      * @Route("/tasks/{id}/delete", name="task_delete")
+     * @IsGranted("ROLE_USER")
      */
     public function deleteTaskAction(Task $task)
     {
